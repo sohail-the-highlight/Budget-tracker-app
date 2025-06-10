@@ -25,6 +25,16 @@ const BudgetList = ({ onEdit, refresh }) => {
     fetchBudgets();
   }, [token, refresh]);
 
+const handleDelete = async (id) => {
+    try {
+      await deleteTransaction(token, id);
+      setRefresh(prev => !prev);
+    } catch (error) {
+      console.error('Error deleting transaction:', error);
+    }
+  };
+
+
   return (
     <Box sx={{ mt: 4 }}>
       <Typography variant="h6" gutterBottom>Monthly Budgets</Typography>
@@ -46,6 +56,9 @@ const BudgetList = ({ onEdit, refresh }) => {
                 <TableCell align="right">${parseFloat(budget.amount).toFixed(2)}</TableCell>
                 <TableCell align="center">
                   <IconButton onClick={() => onEdit(budget)}><Edit /></IconButton>
+                  <IconButton onClick={() => handleDelete(transaction.id)}><Delete /></IconButton>
+
+                  
                 </TableCell>
               </TableRow>
             ))}
