@@ -5,7 +5,7 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import PrivateRoute from './components/PrivateRoute';
 import SignupForm from './components/SignupForm';
-
+//trial rebuild
 function App() {
   return (
     <AuthProvider>
