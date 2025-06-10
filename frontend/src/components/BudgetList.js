@@ -29,7 +29,7 @@ const BudgetList = ({ onEdit, refresh, setRefresh }) => {
   // Corrected handleDelete function for budgets
   const handleDelete = async (id) => {
     try {
-      await deleteBudget(token, id); // Call deleteBudget, not deleteTransaction
+      await deleteBudget(token, id); // Call deleteBudget
       setRefresh(prev => !prev); // Trigger a refresh of the list
     } catch (error) {
       console.error('Error deleting budget:', error);
