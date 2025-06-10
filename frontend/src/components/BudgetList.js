@@ -3,12 +3,13 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   Paper, IconButton, Box, Typography
 } from '@mui/material';
-import { Edit } from '@mui/icons-material';
-import { getBudgets } from '../api/budget';
+import { Edit, Delete } from '@mui/icons-material'; // Import Delete icon
+import { getBudgets, deleteBudget } from '../api/budget'; // Import deleteBudget
 import { AuthContext } from '../context/AuthContext';
 import { format } from 'date-fns';
 
-const BudgetList = ({ onEdit, refresh }) => {
+// Add setRefresh to props
+const BudgetList = ({ onEdit, refresh, setRefresh }) => {
   const [budgets, setBudgets] = useState([]);
   const { token } = useContext(AuthContext);
 
@@ -25,15 +26,15 @@ const BudgetList = ({ onEdit, refresh }) => {
     fetchBudgets();
   }, [token, refresh]);
 
-const handleDelete = async (id) => {
+  // Corrected handleDelete function for budgets
+  const handleDelete = async (id) => {
     try {
-      await deleteTransaction(token, id);
-      setRefresh(prev => !prev);
+      await deleteBudget(token, id); // Call deleteBudget, not deleteTransaction
+      setRefresh(prev => !prev); // Trigger a refresh of the list
     } catch (error) {
-      console.error('Error deleting transaction:', error);
+      console.error('Error deleting budget:', error);
     }
   };
-
 
   return (
     <Box sx={{ mt: 4 }}>
@@ -51,14 +52,13 @@ const handleDelete = async (id) => {
           <TableBody>
             {budgets.map((budget) => (
               <TableRow key={budget.id}>
-                <TableCell>{format(new Date(budget.month), 'MMMM yyyy')}</TableCell>
+                <TableCell>{format(new Date(budget.month), 'MMMM yyyy')}</TableCell> {/* Fixed format string */}
                 <TableCell>{budget.category?.name}</TableCell>
                 <TableCell align="right">${parseFloat(budget.amount).toFixed(2)}</TableCell>
                 <TableCell align="center">
                   <IconButton onClick={() => onEdit(budget)}><Edit /></IconButton>
-                  <IconButton onClick={() => handleDelete(transaction.id)}><Delete /></IconButton>
-
-                  
+                  {/* Correctly call handleDelete with budget.id */}
+                  <IconButton onClick={() => handleDelete(budget.id)}><Delete /></IconButton>
                 </TableCell>
               </TableRow>
             ))}
