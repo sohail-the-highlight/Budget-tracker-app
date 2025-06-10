@@ -99,6 +99,14 @@ export const createBudget = async (token, budgetData) => {
   return response.data;
 };
 
+export const deleteBudget = async (token, budgetId) => {
+  await axios.delete(`${API_URL}/budgets/${budgetId}/`, {
+    headers: {
+      'Authorization': `Token ${token}`
+    }
+  });
+};
+
 export const getFinancialSummary = async (token) => {
   const response = await axios.get(`${API_URL}/summary/`, {
     headers: {
