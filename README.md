@@ -27,15 +27,11 @@ cd backend
 
 Create and activate a Python virtual environment (recommended):
 
-python -m venv venv
-# On Windows:
-# .\venv\Scripts\activate
-# On macOS/Linux:
-# source venv/bin/activate
+
 
 Install backend dependencies:
 
-pip install -r requirements.txt # (Assuming you have a requirements.txt file)
+pip install -r requirements.txt 
 
 If you don't have a requirements.txt file, you'll need to install Django, Django REST Framework, and django-cors-headers manually:
 
