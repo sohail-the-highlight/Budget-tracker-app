@@ -60,8 +60,11 @@ const DashboardPage = () => {
 
   const handleBudgetSubmit = async (formData) => {
     try {
-      if (formData.id) {
-        await updateBudget(token, formData.id, formData);
+      // FIX: Rely on the component's state (`editingBudget`) for more reliable updates.
+      const budgetId = editingBudget?.id;
+      
+      if (budgetId) {
+        await updateBudget(token, budgetId, formData);
       } else {
         await createBudget(token, formData);
       }
@@ -107,8 +110,8 @@ const DashboardPage = () => {
             onSubmit={handleTransactionSubmit}
             initialData={editingTransaction}
             onCancel={handleCloseForms}
-            // FIX: Pass the refresh state down to the form
-            refresh={refresh}
+            // FIX: Add a key to ensure the form component resets when the data changes
+            key={`transaction-${editingTransaction?.id || 'new'}`}
           />
         );
       case 'budget':
@@ -117,8 +120,8 @@ const DashboardPage = () => {
             onSubmit={handleBudgetSubmit}
             initialData={editingBudget}
             onCancel={handleCloseForms}
-            // FIX: Pass the refresh state down to the form
-            refresh={refresh}
+            // FIX: Add a key to ensure the form component resets when the data changes
+            key={`budget-${editingBudget?.id || 'new'}`}
           />
         );
       case 'category':
@@ -153,7 +156,11 @@ const DashboardPage = () => {
         </Box>
       </Modal>
 
-      <BudgetList onEdit={handleEditBudget} refresh={refresh} />
+      {/* FIX: Pass the `triggerRefresh` function as the `setRefresh` prop.
+        This allows the BudgetList component to trigger a data refresh after deleting an item.
+      */}
+      <BudgetList onEdit={handleEditBudget} refresh={refresh} setRefresh={triggerRefresh} />
+      
       <TransactionList onEdit={handleEditTransaction} refresh={refresh} setRefresh={triggerRefresh} />
     </Box>
   );
