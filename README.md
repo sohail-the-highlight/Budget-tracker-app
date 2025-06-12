@@ -94,7 +94,7 @@ Link: https://budget-tracker-app-enyc.vercel.app/
 This link will automatically redirect you to the signup page upon initial access.
 
 Deployed Backend (Django REST Framework API)
-Link: https://budget-tracker-app-dp7u.onrender.com/api/?format=api
+Link:(link is removed intentionally) security reasons
 
 Important Note: When you visit this API root directly, you will correctly receive an HTTP 401 Unauthorized error ("detail": "Authentication credentials were not provided."). This is an intentional security measure, as most API endpoints require a valid authentication token.
 
