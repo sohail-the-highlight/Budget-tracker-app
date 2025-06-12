@@ -64,7 +64,7 @@ cd frontend
 
 
 
-create a .env file and add them following to it to run this locally:REACT_APP_API_BASE_URL=http://127.0.0.1:8000
+create a .env file and add the following to it to run this locally:REACT_APP_API_BASE_URL=http://127.0.0.1:8000
 
 
 Install frontend dependencies:
