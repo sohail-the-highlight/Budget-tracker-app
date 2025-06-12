@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://budget-tracker-app-dp7u.onrender.com/api';
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}/api`;
 
 export const updateTransaction = async (token, transactionId, updatedData) => {
   const response = await axios.put(`${API_URL}/transactions/${transactionId}/`, updatedData, {
