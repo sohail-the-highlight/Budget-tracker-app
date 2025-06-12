@@ -1,6 +1,6 @@
 import axios from 'axios';
 //trial update
-const API_URL = 'https://budget-tracker-app-dp7u.onrender.com/api/auth';
+const API_URL = '${process.env.REACT_APP_API_BASE_URL}/api/auth';
 
 export const login = async (username, password) => {
   const response = await axios.post(`${API_URL}/login/`, {
