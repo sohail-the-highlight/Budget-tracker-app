@@ -8,3 +8,7 @@ services:
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: config.settings
+      - key: DATABASE_URL
+        sync: false
+    postDeployCommand: |
+      python manage.py migrate
