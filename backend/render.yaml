@@ -4,11 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: python manage.py migrate && gunicorn config.wsgi:application
+    startCommand: gunicorn config.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: config.settings
-      - key: DATABASE_URL
-        sync: false
-    postDeployCommand: |
-      python manage.py migrate
