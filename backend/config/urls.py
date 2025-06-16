@@ -27,4 +27,5 @@ urlpatterns = [
     path('api/summary/', FinancialSummaryViewSet.as_view({'get': 'list'}), name='financial-summary'),
     path('api/auth/register/', RegisterView.as_view(), name='register'),
     path('api/auth/login/', obtain_auth_token, name='api-token-auth'), 
+    path('health/', health_check),
 ]
