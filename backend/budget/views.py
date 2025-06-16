@@ -11,6 +11,7 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from .serializers import UserRegisterSerializer
 from .models import Category
+from django.http import JsonResponse
 DEFAULT_CATEGORIES = [
     {"name": "Salary", "category_type": "IN"},
     {"name": "Bonus", "category_type": "IN"},
@@ -29,6 +30,8 @@ DEFAULT_CATEGORIES = [
     {"name": "Travel", "category_type": "EX"},
     {"name": "Insurance", "category_type": "EX"},
 ]
+def health_check(request):
+    return JsonResponse({"status": "ok"})
 class StandardResultsSetPagination(PageNumberPagination):
     page_size = 10
     page_size_query_param = 'page_size'
